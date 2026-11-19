@@ -1,0 +1,58 @@
+/* eslint-disable */
+// Props extracted from the original page (eOkvpHXGMHZ5iS4gr5ah10zqko6Z6CAVPof2B56jiL8.js).
+
+const U = (v) => v;
+const e = ["/","/#work","/aboutme/","/resume/","/","/#work","/aboutme/","/resume/"];
+export default {
+                                    aboutLabel: `About`,
+                                    aboutLink: e[2],
+                                    activeTab: `auto`,
+                                    backLabel: `Projects`,
+                                    darkColors: {
+                                      activeTab: `rgb(44, 44, 46)`,
+                                      border: `rgba(255, 255, 255, 0.08)`,
+                                      menuBg: `rgb(21, 21, 21)`,
+                                      muted: `rgb(161, 161, 170)`,
+                                      pillBg: `rgba(28, 28, 30, 0.6)`,
+                                      text: `rgb(245, 245, 247)`,
+                                    },
+                                    fontFamily: `Inter, system-ui, -apple-system, sans-serif`,
+                                    height: `100%`,
+                                    id: `dapHl2IGj`,
+                                    layoutId: `dapHl2IGj`,
+                                    lightColors: {
+                                      activeTab: `rgb(255, 255, 255)`,
+                                      border: `rgba(0, 0, 0, 0.06)`,
+                                      menuBg: `rgb(247, 247, 244)`,
+                                      muted: `rgb(95, 96, 104)`,
+                                      pillBg: `rgba(255, 255, 255, 0.6)`,
+                                      text: `rgb(29, 29, 31)`,
+                                    },
+                                    name: `Ashley Suh`,
+                                    nameLink: e[0],
+                                    paddingX: 32,
+                                    paddingXPhone: 20,
+                                    paddingY: 20,
+                                    phoneName: `Ashley`,
+                                    resumeLabel: `Resume`,
+                                    resumeLink: e[3],
+                                    scrollDistance: 24,
+                                    sectionOffset: 16,
+                                    sections: [
+                                      { id: `Overview`, label: `Overview` },
+                                      { id: `Problem`, label: `Problem` },
+                                      { id: `Research`, label: `Research` },
+                                      { id: `Ideation`, label: `Ideation` },
+                                      { id: `Designs`, label: `Designs` },
+                                      { id: `Lessons`, label: `Lessons` },
+                                    ],
+                                    showThemeToggle: !0,
+                                    shrinkOnScroll: !0,
+                                    size: `auto`,
+                                    style: { width: `100%` },
+                                    variant: U(`main`),
+                                    width: `100%`,
+                                    workLabel: `Work`,
+                                    workLink: e[1],
+                                    workSection: `Projects`,
+                                  };

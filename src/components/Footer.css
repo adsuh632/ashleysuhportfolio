@@ -1,0 +1,47 @@
+/* Elements / Footer — values from the Framer component (oHWy2) */
+.ft {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 50px; padding: 80px 60px; width: 100%; overflow: hidden; position: relative; flex: none;
+  background-color: var(--token-4408bbc7-5082-4eea-815c-db8a764eb59a, rgb(250, 250, 250));
+  color: var(--token-8303387e-d4c2-4989-af33-54d2c870c7ac, rgb(47, 47, 47));
+}
+.ft p { margin: 0; }
+.ft-top { display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: center; gap: 208px; width: 100%; }
+.ft-nav { display: flex; flex-direction: column; align-items: flex-start; gap: 51px; flex: 1 0 0px; }
+.ft-col { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 41px; width: 100%; }
+.ft-row10 { display: flex; flex-direction: row; align-items: flex-start; justify-content: center; gap: 10px; width: 100%; }
+.ft-row10.ft-center { align-items: center; width: auto; }
+.ft-left { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; flex: 1 0 0px; }
+.ft-title {
+  width: 100%; font-family: "Poppins", "Poppins Placeholder", sans-serif; font-size: 21px; font-weight: 500;
+  line-height: 1.4; letter-spacing: 0; white-space: pre-wrap;
+}
+.ft-links { display: flex; flex-direction: row; align-items: center; justify-content: flex-start; gap: 52px; width: 100%; }
+.ft-row5 { display: flex; flex-direction: row; align-items: center; justify-content: flex-start; gap: 5px; text-decoration: none; color: inherit; }
+.ft-stretch { align-self: stretch; justify-content: center; }
+.ft-linktext {
+  font-family: "Inter Display", "Inter Display Placeholder", sans-serif; font-weight: 500;
+  letter-spacing: -0.4px; line-height: 1.4; text-align: right; white-space: pre;
+}
+.ft-16 { font-size: 16px; }
+.ft-15 { font-size: 15px; }
+.ft-14 { font-size: 14px; }
+.ft-link { color: inherit; text-decoration: none; }
+.ft-link:hover, a:hover > p > .ft-link, .ft-portrait-link:hover .ft-link { text-decoration: underline; }
+.ft-portrait-link { text-decoration: none; color: inherit; display: block; }
+.ft-portrait-wrap { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; }
+.ft-portrait { object-fit: cover; border-radius: 150px; flex: none; }
+.ft-copy {
+  width: 100%; font-family: "Inter Display", "Inter Display Placeholder", sans-serif; font-size: 12px;
+  font-weight: 500; line-height: 1.4; color: rgb(102, 102, 102); position: relative; z-index: 1;
+}
+
+/* phone variant */
+.ft--phone { gap: 20px; padding: 60px 30px; }
+.ft-phone-nav { display: flex; flex-direction: column; align-items: flex-start; gap: 29px; padding: 40px 0; width: 100%; position: relative; z-index: 1; }
+.ft-title-phone {
+  width: 100%; text-align: center; font-family: "Space Grotesk", "Space Grotesk Placeholder", sans-serif;
+  font-size: 20px; font-weight: 700; line-height: 1.4;
+}
+.ft-phone-links { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 30px; width: 100%; padding: 20px 0; overflow: clip; }
+.ft-copy--phone { width: 330px; max-width: 100%; text-align: center; }
