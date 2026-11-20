@@ -4,3 +4,22 @@
   outline: 2px solid currentColor;
   outline-offset: 4px;
 }
+
+/* Scroll reveal (see useScrollReveal.js). Timing comes from tokens.js via CSS vars. */
+.rv {
+  opacity: 0;
+  transform: translate3d(0, var(--motion-rise, 16px), 0);
+}
+.rv.rv-in {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity var(--motion-entrance, 0.5s) var(--motion-ease, ease-out),
+    transform var(--motion-entrance, 0.5s) var(--motion-ease, ease-out) !important;
+  transition-delay: var(--rv-delay, 0s) !important;
+}
+
+/* Reduce Motion: fade only, no movement */
+@media (prefers-reduced-motion: reduce) {
+  .rv { transform: none; }
+}
