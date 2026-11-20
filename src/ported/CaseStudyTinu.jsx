@@ -396,11 +396,11 @@ function be(e) {
       ? u.trim()
       : Ct(p)
         ? p.trim()
-        : `https://ashleysuh.framer.website/#projects`,
+        : `/#work`,
     Tt = i
       ? /*#__PURE__*/ f(xe, {
           label: i,
-          href: wt || `https://ashleysuh.framer.website/#projects`,
+          href: wt || `/#work`,
           variant: m,
           font: mt,
           color: H.text,
@@ -2993,7 +2993,7 @@ Working in ambiguity | With an open-ended brief, I contributed through alignment
           type: A.String,
           title: `Back URL (fallback)`,
           defaultValue: ``,
-          placeholder: `https://ashleysuh.framer.website/#projects`,
+          placeholder: `/#work`,
           description: `Used only if no page is picked above. Empty = your homepage's Work section.`,
         },
         backStyle: {

@@ -5,6 +5,7 @@ const J = (v) => v;
 const e = ["/","/#work","/resume/","/","/#work","/resume/","/","/#work","/resume/"];
 export default {
                                   aboutLabel: `About`,
+                                  aboutLink: "/aboutme/",
                                   activeTab: `auto`,
                                   backLabel: `Projects`,
                                   canvasTheme: `light`,

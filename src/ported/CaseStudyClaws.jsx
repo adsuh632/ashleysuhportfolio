@@ -398,11 +398,11 @@ function Te(e) {
       ? c.trim()
       : wt(d)
         ? d.trim()
-        : `https://ashleysuh.framer.website/#projects`,
+        : `/#work`,
     Et = i
       ? /*#__PURE__*/ m(Ee, {
           label: i,
-          href: Tt || `https://ashleysuh.framer.website/#projects`,
+          href: Tt || `/#work`,
           variant: f,
           font: ht,
           color: V.text,
@@ -2743,7 +2743,7 @@ UIA ingress and egress | A shortened subtask menu that shows only the current ta
           type: D.String,
           title: `Back URL (fallback)`,
           defaultValue: ``,
-          placeholder: `https://ashleysuh.framer.website/#projects`,
+          placeholder: `/#work`,
           description: `Used only if no page is picked above. Empty = your homepage's Work section.`,
         },
         backStyle: {
