@@ -1,0 +1,6 @@
+/* Keyboard focus for case study cards: visible ring, mouse clicks don't show it */
+.case-card:focus { outline: none; }
+.case-card:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}

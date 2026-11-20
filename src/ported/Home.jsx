@@ -3,6 +3,10 @@
 import { t as e } from "../shim/rt.js";
 import { A as t, C as n, E as r, I as i, P as a, R as o, _ as s, b as c, c as l, d as u, j as d, l as f, m as p, o as m, p as h, s as g, w as _, y as v, } from "../shim/react.js";
 import { C as y, a as b, r as x, t as S } from "../shim/motion.js";
+import { motion as Motion, useReducedMotion as useReducedMotionM } from "framer-motion";
+import { useState as useStateM, useEffect as useEffectM } from "react";
+import { heroText, heroPhoto, shouldPlayHeroEntrance, markHeroEntrancePlayed } from "../motion/hero.js";
+import { transition as tr, duration as dur, distance as dist, scale as sc, css as cssT, isFinePointerEvent } from "../motion/tokens.js";
 import { B as C, C as w, D as T, F as E, N as D, S as O, T as k, X as A, Z as ee, _ as te, _t as ne, a as j, at as re, b as M, c as ie, ct as ae, dt as oe, f as se, g as N, gt as ce, h as le, i as P, it as ue, lt as de, mt as fe, n as pe, nt as me, o as F, ot as he, pt as ge, q as _e, r as ve, st as ye, t as be, u as xe, ut as Se, v as Ce, x as we, y as Te, } from "../shim/framer.jsx";
 
 function Qe(e) {
@@ -52,6 +56,9 @@ function Qe(e) {
   );
 }
 function $e(e) {
+  // motion: hero entrance (once per session)
+  const [heroPlay] = useStateM(shouldPlayHeroEntrance);
+  useEffectM(() => markHeroEntrancePlayed(), []);
   let {
       intro: t,
       image: n,
@@ -160,7 +167,8 @@ function $e(e) {
           /*#__PURE__*/ f(`div`, {
             className: `hs-text`,
             children: [
-              /*#__PURE__*/ m(`p`, {
+              /*#__PURE__*/ m(Motion.p, {
+                ...heroText(0, heroPlay),
                 className: `hs-intro`,
                 style: { ...b, color: D ? h : a },
                 children: t,
@@ -171,8 +179,8 @@ function $e(e) {
                 style: y,
                 children: S.map((e, t) =>
                   /*#__PURE__*/ m(
-                    `span`,
-                    { className: `hs-line`, children: e },
+                    Motion.span,
+                    { ...heroText(t + 1, heroPlay), className: `hs-line`, children: e },
                     t,
                   ),
                 ),
@@ -182,7 +190,8 @@ function $e(e) {
           n?.src &&
             /*#__PURE__*/ m(`div`, {
               className: `hs-media`,
-              children: /*#__PURE__*/ m(`img`, {
+              children: /*#__PURE__*/ m(Motion.img, {
+                ...heroPhoto(S.length + 1, heroPlay),
                 className: `hs-img`,
                 src: n.src,
                 alt: n.alt || `Portrait of Ashley`,
@@ -649,14 +658,21 @@ function ot({
   tagSize: S,
   yearSize: C,
 }) {
-  let [w, T] = s(!1),
+  // motion: hover (mouse only) + keyboard focus share one "active" state
+  const [hovered, setHovered] = useStateM(!1),
+    [focused, setFocused] = useStateM(!1),
+    reduceMotion = useReducedMotionM();
+  let w = (hovered || focused) && !reduceMotion,
     E = (Array.isArray(t.tags) ? t.tags : (t.tags || ``).split(`,`))
       .map((e) => e.trim())
       .filter(Boolean),
     D = !!t.link,
     O = /*#__PURE__*/ f(`a`, {
-      onMouseEnter: () => T(!0),
-      onMouseLeave: () => T(!1),
+      className: `case-card`,
+      onPointerEnter: (ev) => isFinePointerEvent(ev) && setHovered(!0),
+      onPointerLeave: () => setHovered(!1),
+      onFocus: (ev) => setFocused(ev.currentTarget.matches(`:focus-visible`)),
+      onBlur: () => setFocused(!1),
       style: {
         display: `flex`,
         flexDirection: `column`,
@@ -680,8 +696,8 @@ function ot({
               `inset -1px -1px 0 rgba(255, 255, 255, 0.18)`,
               `inset 0 0 24px rgba(255, 255, 255, 0.18)`,
             ].join(`, `),
-        transition: `transform 350ms cubic-bezier(.2,.7,.2,1), background-color .3s ease`,
-        transform: w && D ? `translateY(-3px)` : `none`,
+        transition: `background-color .3s ease`,
+        flex: `1 1 auto`,
         color: _,
         fontFamily: y,
         textDecoration: `none`,
@@ -732,8 +748,8 @@ function ot({
                       display: `block`,
                       width: `100%`,
                       height: `auto`,
-                      transform: w ? `scale(1.03)` : `scale(1)`,
-                      transition: `transform 600ms cubic-bezier(.2,.7,.2,1)`,
+                      transform: w ? `scale(${sc.imageZoom})` : `scale(1)`,
+                      transition: `transform ${cssT.ms(dur.zoom)} ${cssT.ease}`,
                     },
                   })
                 : /*#__PURE__*/ m(`div`, { style: { paddingTop: `75%` } }),
@@ -763,8 +779,8 @@ function ot({
                     width: `100%`,
                     height: `100%`,
                     objectFit: r,
-                    transform: w ? `scale(1.03)` : `scale(1)`,
-                    transition: `transform 600ms cubic-bezier(.2,.7,.2,1)`,
+                    transform: w ? `scale(${sc.imageZoom})` : `scale(1)`,
+                    transition: `transform ${cssT.ms(dur.zoom)} ${cssT.ease}`,
                   },
                 }),
             }),
@@ -841,8 +857,8 @@ function ot({
               fill: `none`,
               style: {
                 flexShrink: 0,
-                transform: w ? `translate(2px,-2px)` : `none`,
-                transition: `transform 250ms ease`,
+                transform: w ? `translate(${dist.nudge}px,-${dist.nudge}px)` : `none`,
+                transition: `transform ${cssT.ms(dur.hover)} ${cssT.ease}`,
               },
               children: /*#__PURE__*/ m(`path`, {
                 d: `M4 12L12 4M5.5 4H12V10.5`,
@@ -864,13 +880,38 @@ function ot({
         }),
       ],
     });
-  return D
+  const card = D
     ? /*#__PURE__*/ m(se, {
         href: t.link,
         openInNewTab: !!t.newTab,
         children: O,
       })
     : O;
+  // motion: lift + scale on hover/focus, press on tap; deeper shadow fades in (opacity only)
+  return /*#__PURE__*/ f(Motion.div, {
+    style: { position: `relative`, display: `flex`, minWidth: 0, borderRadius: l },
+    animate: w && D ? { y: -dist.lift, scale: sc.hover } : { y: 0, scale: 1 },
+    whileTap: D ? { scale: sc.press } : void 0,
+    transition: tr.hover,
+    children: [
+      /*#__PURE__*/ m(Motion.span, {
+        "aria-hidden": !0,
+        style: {
+          position: `absolute`,
+          inset: 0,
+          borderRadius: l,
+          pointerEvents: `none`,
+          boxShadow: e
+            ? `0 22px 48px rgba(0, 0, 0, 0.45)`
+            : `0 22px 48px rgba(20, 30, 70, 0.16), 0 6px 14px rgba(20, 30, 70, 0.06)`,
+        },
+        initial: !1,
+        animate: { opacity: w && D ? 1 : 0 },
+        transition: tr.hover,
+      }),
+      card,
+    ],
+  });
 }
 function st(e) {
   let {
