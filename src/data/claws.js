@@ -1531,7 +1531,7 @@ Third item`,
                                       link: e[1],
                                       subtitle: `Curator-led film discovery platform`,
                                       title: `FilmReel`,
-                                      url: `/`,
+                                      url: `/filmreelpw/`,
                                     },
                                     {
                                       id: `default-item-1`,
