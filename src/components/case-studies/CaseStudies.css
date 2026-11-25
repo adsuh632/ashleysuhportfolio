@@ -1,0 +1,221 @@
+/* Homepage case studies. Colors come from the site tokens (global.css) and the values the
+   original cards used. The nav toggle rewrites prefers-color-scheme rules, so the dark block
+   below follows the toggle, and the system setting when nothing is stored. */
+.cs-section {
+  --cs-bg: var(--token-e510d217-8145-4a70-ae6b-bcdd437a9a4a, #fff);
+  --cs-text: var(--token-58507be5-8cf3-41b5-819b-33db1dcdd00c, #121212);
+  --cs-muted: var(--token-93980db0-88c7-456d-8351-1cf77c1257de, #737373);
+  --cs-muted-on: #4b4c52;
+  --cs-card: #fff;
+  --cs-border: rgba(20, 30, 70, 0.08);
+  --cs-shadow: 0 10px 34px rgba(20, 30, 70, 0.14), 0 2px 6px rgba(20, 30, 70, 0.06);
+  --cs-tint-base: #fff;
+  --cs-tint-a: 8%;
+  --cs-tint-b: 18%;
+  --cs-tag-bg: rgba(255, 255, 255, 0.85);
+  --cs-tag-border: rgba(255, 255, 255, 0.85);
+  --cs-tag-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 1px 3px rgba(20, 30, 70, 0.14);
+  --cs-cta-mix: 68%; /* hovered button text: accent darkened (light) or lightened (dark) to pass AA */
+  --cs-cta-toward: #000;
+  --cs-cta: #f3f3f3;
+  --cs-cta-on: #fff;
+  --cs-cta-border: rgba(0, 0, 0, 0.1);
+  --cs-tile: color-mix(in srgb, var(--accent) 80%, #000);
+  --cs-tile-rest: 0.12;
+  --cs-tile-on: 0.5;
+  --cs-time: 360ms;
+  --cs-ease: var(--motion-ease, cubic-bezier(0.22, 1, 0.36, 1));
+  --cs-move: 1;
+  width: 100%;
+  padding: 48px 16px;
+  background: var(--cs-bg);
+  color: var(--cs-text);
+  font-family: Inter, "Inter Placeholder", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  .cs-section {
+    --cs-muted: #a1a1aa;
+    --cs-muted-on: #d0d0d5;
+    --cs-text: #f5f5f7;
+    --cs-card: #1f1f1f;
+    --cs-border: rgba(255, 255, 255, 0.09);
+    --cs-shadow: 0 10px 34px rgba(0, 0, 0, 0.35);
+    --cs-tint-base: #1f1f1f;
+    --cs-tint-a: 16%;
+    --cs-tint-b: 34%;
+    --cs-tag-bg: rgba(44, 44, 46, 0.85);
+    --cs-tag-border: rgba(255, 255, 255, 0.12);
+    --cs-tag-shadow: none;
+    --cs-cta-mix: 45%;
+    --cs-cta-toward: #fff;
+    --cs-cta: #2c2c2e;
+    --cs-cta-on: #48484b;
+    --cs-cta-border: rgba(255, 255, 255, 0.12);
+    --cs-tile: color-mix(in srgb, var(--accent) 30%, #fff);
+    --cs-tile-rest: 0.1;
+    --cs-tile-on: 0.55;
+  }
+}
+
+.cs-grid { display: grid; max-width: 1300px; grid-template-columns: minmax(0, 1fr); gap: 30px; margin: 0 auto; padding: 0; list-style: none; }
+.cs-cell { display: flex; min-width: 0; }
+
+/* --on is the single switch: 0 resting, 1 hover / keyboard focus */
+.cs-card {
+  --on: 0;
+  --muted: var(--cs-muted);
+  --cs-cta-on-text: color-mix(in srgb, var(--accent) var(--cs-cta-mix), var(--cs-cta-toward));
+  --cs-cta-text: var(--cs-text);
+  --cs-cta-weight: 400;
+  --cs-arrow-weight: 1.5;
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  padding: 14px;
+  overflow: hidden;
+  border: 1px solid var(--cs-border);
+  border-radius: 20px;
+  background: var(--cs-card);
+  box-shadow: var(--cs-shadow);
+  color: inherit;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+@media (hover: hover) and (pointer: fine) {
+  .cs-card:hover { --on: 1; --muted: var(--cs-muted-on); --cs-cta-text: var(--cs-cta-on-text); --cs-cta-weight: 700; --cs-arrow-weight: 2; }
+}
+.cs-card:focus { outline: none; }
+.cs-card:focus-visible { --on: 1; --muted: var(--cs-muted-on); --cs-cta-text: var(--cs-cta-on-text); --cs-cta-weight: 700; --cs-arrow-weight: 2; outline: 2px solid currentColor; outline-offset: 4px; }
+.cs-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    150deg,
+    color-mix(in srgb, var(--accent) var(--cs-tint-a), var(--cs-tint-base)),
+    color-mix(in srgb, var(--accent) var(--cs-tint-b), var(--cs-tint-base))
+  );
+  opacity: var(--on);
+  transition: opacity var(--cs-time) var(--cs-ease);
+}
+
+/* Text */
+.cs-text { position: relative; z-index: 1; display: flex; flex: 1; flex-direction: column; align-items: flex-start; padding: 12px 10px 18px; }
+.cs-eyebrow, .cs-desc { color: var(--muted); transition: color var(--cs-time) var(--cs-ease); }
+.cs-eyebrow { font-size: 13px; line-height: 1.4; text-transform: uppercase; }
+.cs-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; min-height: 36px; }
+.cs-title { margin-top: 6px; font-size: 22px; font-weight: 500; line-height: 1.25; letter-spacing: -0.02em; }
+.cs-desc { margin-top: 8px; font-size: 18px; line-height: 1.5; text-wrap: pretty; }
+.cs-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: auto 0 0; padding: 0; list-style: none; }
+.cs-desc + .cs-tags::before { content: ""; flex: 0 0 100%; height: 10px; }
+.cs-tag {
+  padding: 4px 9px;
+  border: 1px solid var(--cs-tag-border);
+  border-radius: 999px;
+  background: var(--cs-tag-bg);
+  box-shadow: var(--cs-tag-shadow);
+  font-size: 13px;
+  line-height: 1.2;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.cs-cta {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+  margin: 0;
+  padding: 7px 10px 7px 13px;
+  overflow: hidden;
+  border: 1px solid var(--cs-cta-border);
+  border-radius: 999px;
+  background: var(--cs-cta);
+  color: var(--cs-cta-text);
+  transition: color var(--cs-time) var(--cs-ease);
+  font-size: 13px;
+  font-weight: var(--cs-cta-weight);
+  line-height: 1.4;
+}
+.cs-cta--below { margin-top: 18px; }
+.cs-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--cs-cta-on);
+  opacity: var(--on);
+  transition: opacity var(--cs-time) var(--cs-ease);
+}
+/* an invisible bold copy reserves the width, so the button doesn't resize on hover */
+.cs-cta-label { display: grid; }
+.cs-cta-label::after { content: attr(data-label) / ""; height: 0; overflow: hidden; visibility: hidden; font-weight: 700; }
+.cs-arrow path { stroke-width: var(--cs-arrow-weight); }
+.cs-arrow { transform: translateX(calc(var(--on) * var(--cs-move) * 4px)); transition: transform var(--cs-time) var(--cs-ease); }
+
+/* Image: always whole, height follows its own proportions */
+.cs-visual { position: relative; }
+.cs-frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  transition: transform var(--cs-time) var(--cs-ease);
+}
+.cs-card--lift .cs-frame { transform: translateY(calc(var(--on) * var(--cs-move) * -8px)); }
+.cs-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+.cs-img--hover { opacity: var(--on); transition: opacity var(--cs-time) var(--cs-ease); }
+
+/* Tiles sit against the image's top edge, beside the CTA */
+.cs-tiles {
+  position: absolute;
+  right: 0;
+  bottom: 100%;
+  width: min(45%, 300px);
+  height: 64px;
+  color: var(--cs-tile);
+  opacity: calc(var(--cs-tile-rest) + var(--on) * (var(--cs-tile-on) - var(--cs-tile-rest)));
+  transition: opacity var(--cs-time) var(--cs-ease);
+  pointer-events: none;
+  -webkit-mask: radial-gradient(ellipse 100% 100% at 100% 100%, #000 35%, transparent 92%);
+  mask: radial-gradient(ellipse 100% 100% at 100% 100%, #000 35%, transparent 92%);
+}
+
+@media (min-width: 768px) {
+  .cs-section { padding: 50px 28px 80px; }
+  .cs-title { font-size: 20px; }
+  .cs-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cs-cell--full { grid-column: 1 / -1; }
+}
+@media (min-width: 1024px) {
+  .cs-section { padding: 56px 40px 80px; }
+  .cs-title { font-size: 28px; }
+  .cs-card--full { flex-direction: row; gap: 24px; }
+  .cs-card--full .cs-text { flex: 1 1 0; min-width: 0; padding: 14px 10px 14px 18px; }
+  .cs-card--full .cs-visual { flex: 0 0 60%; align-self: center; }
+  .cs-card--full .cs-tags { margin-top: 0; }
+  .cs-card--full .cs-cta--below { margin-top: auto; }
+  .cs-card--full .cs-tiles { right: calc(100% + 12px); bottom: 0; width: 180px; height: 170px; }
+}
+@media (min-width: 1400px) {
+  .cs-section { padding: 80px 40px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cs-section { --cs-move: 0; }
+}
+/* narrow desktop: keep the wide card's text as short as its image, and the tiles below that text */
+@media (min-width: 1024px) and (max-width: 1279.98px) {
+  .cs-card--full .cs-title { font-size: 22px; }
+  .cs-card--full .cs-text { padding: 0 6px 0 12px; }
+  .cs-card--full .cs-desc { font-size: 17px; }
+  .cs-card--full .cs-tags { margin-bottom: 14px; }
+  .cs-card--full .cs-tiles { width: 130px; height: 70px; }
+}
+@media (min-width: 1280px) {
+  .cs-card--full .cs-desc { font-size: 19px; }
+  .cs-card--full .cs-tiles { height: 90px; }
+}
